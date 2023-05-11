@@ -16,6 +16,12 @@ public class Domicilio {
         this.calle = calle;
         this.nroCalle = nroCalle;
     }
+    public Domicilio(int id,String localidad,String provincia, int nroCalle){
+        this.id = id;
+        this.localidad = localidad;
+        this.provincia = provincia;
+        this.nroCalle = nroCalle;
+    }
 
     public int getId() {
         return id;

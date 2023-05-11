@@ -63,17 +63,23 @@ public class Sucursal {
         return empleado;
     }
 
-    public boolean agregarEmpleado(int dni, String nombre, String apellido, int nro_afiliado,
-    ObraSocial obra_social, Domicilio domicilio, int cuil){
+    public void agregarEmpleado(int dni, String nombre, String apellido, int nro_afiliado,
+    ObraSocial obra_social, Domicilio domicilio, String cuil,boolean encargado){
         Empleado objeto=this.traerEmpleado(dni);
         if(objeto!=null){
             System.out.println("Este empleado "+ dni+" ya existe");
+        }else{
+            objeto=new Empleado(dni, nombre, apellido, nro_afiliado, obra_social, domicilio, cuil,encargado);
+            this.lstEmpleado.add(objeto);
+            agregarEncargado(objeto);
         }
-        objeto=new Empleado(dni, nombre, apellido, nro_afiliado, obra_social, domicilio, cuil);
-        return this.lstEmpleado.add(objeto);
+        
     }
     public void agregarEncargado(Empleado empleado){
-        this.setEncargado(empleado);
+        if(empleado.IsEncargado()==true){
+            this.setEncargado(empleado);
+        }
+        this.encargado=empleado;
 
     }
     public Venta traerVenta(int nroTicket){

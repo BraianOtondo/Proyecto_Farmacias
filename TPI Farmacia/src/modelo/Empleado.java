@@ -6,7 +6,7 @@ public class Empleado extends Persona{
 
     public Empleado(int dni, String nombre, String apellido, int nro_afiliado,
             ObraSocial obra_social, Domicilio domicilio, String cuil,boolean encargado) {
-        super(dni, nombre, apellido, true, nro_afiliado, obra_social, domicilio);
+        super(dni, nombre, apellido, nro_afiliado, obra_social, domicilio);
         this.cuil = cuil;
         this.encargado=encargado;
     }

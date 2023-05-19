@@ -1,26 +1,24 @@
 package modelo;
 
 public class Cliente extends Persona{
-    private boolean particular;
+   
 
-    public Cliente(int dni, String nombre, String apellido, boolean esEmpleado, int nro_afiliado,
-            ObraSocial obra_social, Domicilio domicilio, boolean particular) {
-        super(dni, nombre, apellido, esEmpleado, nro_afiliado, obra_social, domicilio);
-        this.particular = particular;
+    public Cliente(int dni, String nombre, String apellido, int nro_afiliado,
+     ObraSocial obra_social, Domicilio domicilio) {
+        super(dni, nombre, apellido, nro_afiliado, obra_social, domicilio);
+        
     }
 
-    public Cliente(int dni, String nombre, String apellido, boolean esEmpleado, Domicilio domicilio,
-            boolean particular) {
-        super(dni, nombre, apellido, esEmpleado, domicilio);
-        this.particular = particular;
+    public Cliente(int dni, String nombre, String apellido, Domicilio domicilio) {
+        super(dni, nombre, apellido, domicilio);
     }
 
-    public boolean IsParticular() {
-        return particular;
+    @Override
+    public String toString() {
+        return "Cliente [dni=" + this.getDni() + ", nombre=" + this.getNombre() + ", apellido=" + this.getApellido() + ", nro_afiliado="
+        +this.getNro_afiliado()+ ", obra_social=" + this.getObra_social() + ", domicilio=" +this.getDomicilio() + "]";
     }
 
-    public void setParticular(boolean particular) {
-        this.particular = particular;
-    }
+    
     
 }

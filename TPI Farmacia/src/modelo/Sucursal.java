@@ -63,8 +63,8 @@ public class Sucursal {
         return empleado;
     }
 
-    public void agregarEmpleado(int dni, String nombre, String apellido, int nro_afiliado,
-    ObraSocial obra_social, Domicilio domicilio, String cuil,boolean encargado){
+    public void agregarEmpleado(int dni,String cuil, String nombre, String apellido, int nro_afiliado,
+    ObraSocial obra_social, Domicilio domicilio,boolean encargado){
         Empleado objeto=this.traerEmpleado(dni);
         if(objeto!=null){
             System.out.println("Este empleado "+ dni+" ya existe");
@@ -75,6 +75,7 @@ public class Sucursal {
         }
         
     }
+
     public void agregarEncargado(Empleado empleado){
         if(empleado.IsEncargado()==true){
             this.setEncargado(empleado);

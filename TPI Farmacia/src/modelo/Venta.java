@@ -26,9 +26,10 @@ public class Venta {
     public String getTicketFiscal() {
         return ticketFiscal;
     }
-   // public void setTicketFiscal(String ticketFiscal) {
-     //   this.ticketFiscal = ticketFiscal; Se cambia en base a sucursal y nroTicket
-    //}
+    // Se cambia en base a sucursal y nroTicket
+   public void setTicketFiscal(String ticketFiscal) {
+     this.ticketFiscal = ticketFiscal;           
+    }
     public int getNroTicket() {
         return nroTicket;
     }
@@ -99,5 +100,11 @@ public class Venta {
             this.lstVenta.add(objeto);
         }
 	}
+    @Override
+    public String toString() {
+        return "Venta [ticketFiscal=" + ticketFiscal + ", nroTicket=" + nroTicket + ", fecha=" + fecha + ", hora="
+                + hora + ", sucursal=" + sucursal + ", cliente=" + cliente + ", empleado=" + empleado + ", efectivo="
+                + efectivo + ", lstVenta=" + lstVenta + "]";
+    }
 	
 }

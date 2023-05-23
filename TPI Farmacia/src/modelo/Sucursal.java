@@ -103,6 +103,10 @@ public class Sucursal {
             System.out.println("Esta venta ya esta agregada");
         }else{
             objeto=new Venta(nroTicket, fecha, hora, sucursal, cliente, empleado, efectivo);
+            String nroTicketString= Integer.toString(nroTicket);
+            String nroIdSucrsalString=Integer.toString(this.idSucursal);
+            String cadenaTicketFiscal=nroIdSucrsalString+"-"+nroTicketString;
+            objeto.setTicketFiscal(cadenaTicketFiscal);
             this.lstVenta.add(objeto);
         }
     }

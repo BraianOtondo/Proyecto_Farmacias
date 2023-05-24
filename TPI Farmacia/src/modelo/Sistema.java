@@ -1,6 +1,7 @@
 package modelo;
 import java.util.ArrayList;
 import java.util.List;
+
 public class Sistema {
     private List<Sucursal> lstSucursal= new ArrayList<Sucursal>();
 
@@ -70,5 +71,4 @@ public class Sistema {
 		}
 		return this.lstSucursal.remove(objeto);
 	}
-
 }

@@ -8,10 +8,14 @@ import modelo.Producto;
 import modelo.Sistema;
 import modelo.Sucursal;
 import modelo.Venta;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
-//import modelo.Sistema;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
 public class App {
     public static void main(String[] args){
         //CREAMOS SISTEMA QUE TIENE SUCURSALES
@@ -137,5 +141,43 @@ public class App {
       Venta venta5=sistema.getLstSucursal().get(0).traerVenta(5167);
       //Detalle venta
       venta5.agregardetalleVenta(producto5, 6);
-    }
+      //JSON
+      JSONObject jasonDomicilio=new JSONObject();
+      jasonDomicilio.put("ID :",sucursal1.getDomicilio().getId());
+      jasonDomicilio.put("Provincia",sucursal1.getDomicilio().getProvincia());
+      jasonDomicilio.put("Localidad: ",sucursal1.getDomicilio().getLocalidad());
+      jasonDomicilio.put("Calle: ",sucursal1.getDomicilio().getCalle());
+      jasonDomicilio.put("Numero de Calle: ",sucursal1.getDomicilio().getNroCalle());
+
+      JSONObject jasonEncargado=new JSONObject();
+      jasonEncargado.put("Cuil: ",sucursal1.getEncargado().getCuil());
+      jasonEncargado.put("DNI: ",sucursal1.getEncargado().getDni());
+      jasonEncargado.put("Nombre: ",sucursal1.getEncargado().getNombre());
+      jasonEncargado.put("Apellido: ",sucursal1.getEncargado().getApellido());
+      
+
+
+      JSONArray jsonArraySucursal=new JSONArray();
+      for(Sucursal sucursal:sistema.getLstSucursal()){
+        JSONObject jasonSucursal = new JSONObject();
+        jasonSucursal.put("ID: ",sucursal.getIdSucursal());
+        jasonSucursal.put("Encargado: ",jasonEncargado);
+        jasonSucursal.put("Domicilio: ",jasonDomicilio);
+
+        jsonArraySucursal.add(jasonSucursal);
+        }
+    
+    
+
+
+
+    try (FileWriter fileWriter = new FileWriter("sucursales.json")) {
+      fileWriter.write(jsonArraySucursal.toJSONString());
+      fileWriter.flush();
+  } catch (IOException e) {
+      e.printStackTrace();
+  }
+
+ 
+  }
 }

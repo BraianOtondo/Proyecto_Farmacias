@@ -45,8 +45,7 @@ public class Sucursal {
     }
     @Override
     public String toString() {
-        return "Sucursal [idSucursal=" + idSucursal + ", domicilio=" + domicilio + ", encargado=" + encargado
-                + ", lstEmpleado=" + lstEmpleado + ", lstVenta=" + lstVenta + "]";
+    return "Sucursal [idSucursal=" + idSucursal + ", domicilio=" + domicilio + ", encargado=" + encargado+"]";
     }
 
     public Empleado traerEmpleado(int dni){
@@ -110,4 +109,5 @@ public class Sucursal {
             this.lstVenta.add(objeto);
         }
     }
+
 }

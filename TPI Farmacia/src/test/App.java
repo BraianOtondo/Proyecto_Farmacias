@@ -2,9 +2,12 @@ package test;
 import modelo.Cliente;
 import modelo.Domicilio;
 import modelo.Empleado;
+import modelo.Laboratorio;
 import modelo.ObraSocial;
+import modelo.Producto;
 import modelo.Sistema;
 import modelo.Sucursal;
+import modelo.Venta;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -68,19 +71,71 @@ public class App {
        Cliente cliente8=new Cliente(7603764, "Tomas", "Solari", domicilio6);
        //Cliente Adrian Thinks
        Cliente cliente9=new Cliente(5125468, "Adrian", "Thinks", domiclilio3);
+      
+       // CREAMOS LABORATORIOS
+      //Laboratorio 2356
+      Laboratorio laboratorio1= new Laboratorio(2356, "La Maxx");
+      //Laboratorio 721
+      Laboratorio laboratorio2=new Laboratorio(721, "HermanosLarrel");
+      //Laboratorio 29873
+      Laboratorio  laboratorio3=new Laboratorio(29873, "La barata");
+
+      //CREAMOS PRODUCTOS
+      //Producto 231 Tableta de Ibuprofeno
+      Producto producto1=new Producto(231, 500, true, "Tableta de Ibuprofeno con 8 comprimidos", laboratorio3);
+      //Producto 672
+      Producto producto2=new Producto(672, 479, false, "Shampoo Garnier Aguacate ", laboratorio3);
+      //Producto 29
+      Producto producto3=new Producto(29, 800, false, "Cepillo de dientes para brackets GUM", laboratorio2);
+      //Producto 16
+      Producto producto4=new Producto(16, 3000, true, "Vitaminas Superdin ", laboratorio1);
+      //Producto 178
+      Producto producto5=new Producto(178,100, false, "Packete de Gasas", laboratorio2);
+      //Producto 10
+      Producto producto6=new Producto(10, 6000, false, "EvaTest", laboratorio2);
+      //Producto 177
+      Producto producto7=new Producto(177, 60, true, "Migral 600mg 1 comprimido", laboratorio1);
+      //Producto 82
+      Producto producto8=new Producto(82, 1000, true, "Tableta de IbuEvanol 6 comprimidos", laboratorio3);
+      //Producto 9
+      Producto producto9=new Producto(9, 460, false, "Colgate Menta ", laboratorio3);
 
        // CREAMOS VENTAS
        //(Hora de venta 24hs todas las farmacias)
 
+       //Venta  1-4253------------------------------------------------------------------
        sistema.getLstSucursal().get(0).agregarVenta(4253, LocalDate.of(2023,2,5), LocalTime.of(9, 30),sucursal1,cliente1,empleado1,false);
+       Venta venta1=sistema.getLstSucursal().get(0).traerVenta(4253);
+       //Detalle Venta
+       venta1.agregardetalleVenta(producto8, 2);
+       venta1.agregardetalleVenta(producto2, 4);
        
-       System.out.println(sistema.getLstSucursal().get(0).getLstVenta().get(0).toString());
-       //agregarVenta(int nroTicket, LocalDate fecha, LocalTime hora, Sucursal sucursal, Cliente cliente, Empleado empleado, boolean efectivo){
-  
-       
-        //System.out.println(sistema.getLstSucursal().get(0).toString());
-        //LocalDate fecha=LocalDate.of(2022,8,15);
-		//LocalTime time = LocalTime.of(5, 30, 45, 35);
-        
+      //Venta 1-62346------------------------------------------------------------------
+      sistema.getLstSucursal().get(0).agregarVenta(62346, LocalDate.of(2023, 1, 15), LocalTime.of(23, 11), sucursal1, cliente9, empleado4, true);
+      Venta venta2=sistema.getLstSucursal().get(0).traerVenta(62346);
+      //Detalle venta
+      venta2.agregardetalleVenta(producto4, 1);
+      venta2.agregardetalleVenta(producto6, 5);
+      venta2.agregardetalleVenta(producto1, 2);
+
+      //Venta 1-45615------------------------------------------------------------------
+      sistema.getLstSucursal().get(0).agregarVenta(45615, LocalDate.of(2023, 2, 6), LocalTime.of(14,42), sucursal1, cliente5, empleado3, true);
+      Venta venta3=sistema.getLstSucursal().get(0).traerVenta(45615);
+      //Detalle venta
+      venta3.agregardetalleVenta(producto7, 6);
+
+      //Venta 1-8321------------------------------------------------------------------
+      sistema.getLstSucursal().get(0).agregarVenta(8321, LocalDate.of(2023, 9, 21), LocalTime.of(2, 31), sucursal1, cliente8, empleado2, false);
+      Venta venta4=sistema.getLstSucursal().get(0).traerVenta(8321);
+      //Detalle venta
+      venta4.agregardetalleVenta(producto9, 1);
+      venta4.agregardetalleVenta(producto4, 4);
+      venta4.agregardetalleVenta(producto3, 2);
+
+      //Venta 1-5167------------------------------------------------------------------
+      sistema.getLstSucursal().get(0).agregarVenta(5167,LocalDate.of(2023, 10, 2),LocalTime.of(8, 11), sucursal1, cliente9, empleado4, true);
+      Venta venta5=sistema.getLstSucursal().get(0).traerVenta(5167);
+      //Detalle venta
+      venta5.agregardetalleVenta(producto5, 6);
     }
 }

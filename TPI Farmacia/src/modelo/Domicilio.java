@@ -69,7 +69,7 @@ public class Domicilio {
 
     @Override
     public String toString() {
-        return "Domicilio [id=" + id + ", localidad=" + localidad + ", provincia=" + provincia + ", calle=" + calle
+        return "[id=" + id + ", localidad=" + localidad + ", provincia=" + provincia + ", calle=" + calle
                 + ", nroCalle=" + nroCalle + "]";
     }
 

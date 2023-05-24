@@ -4,9 +4,9 @@ public class Producto {
     private int idProducto;
     private float precio;
     private boolean medicamento;
-    private StringBuffer descripcion;
+    private String descripcion;
     private Laboratorio laboratorio;
-    public Producto(int idProducto, float precio, boolean medicamento, StringBuffer descripcion,
+    public Producto(int idProducto, float precio, boolean medicamento, String descripcion,
             Laboratorio laboratorio) {
         this.idProducto = idProducto;
         this.precio = precio;
@@ -32,10 +32,10 @@ public class Producto {
     public void setMedicamento(boolean medicamento) {
         this.medicamento = medicamento;
     }
-    public StringBuffer getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
-    public void setDescripcion(StringBuffer descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
     public Laboratorio getLaboratorio() {

@@ -1,25 +1,19 @@
 package test;
-import modelo.Cliente;
-import modelo.Domicilio;
-import modelo.Empleado;
-import modelo.Laboratorio;
-import modelo.ObraSocial;
-import modelo.Producto;
-import modelo.Sistema;
-import modelo.Sucursal;
-import modelo.Venta;
+
+import modelo.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import java.io.FileWriter;
 import java.io.IOException;
+//import java.util.ArrayList;
 import java.util.List;
-
 public class App {
     public static void main(String[] args){
         //CREAMOS SISTEMA QUE TIENE SUCURSALES
        Sistema sistema=new Sistema();
+
        //CREAMOS OBRAS SOCIALES
        ObraSocial obraSocial1=new ObraSocial(1, "OSCA");
        ObraSocial obraSocial2=new ObraSocial(2, "OSDE");
@@ -36,10 +30,14 @@ public class App {
        Domicilio domicilio7=new Domicilio(7, "Burzaco", "Buenos Aires", "Las Tanarias", 6235);
        Domicilio domicilio8=new Domicilio(8, "Ezpeleta", "Buenos Aires", 3);
        Domicilio domicilio9=new Domicilio(9, "Monte Grande", "Buenos Aires", "Pehuajo", 793);
-       //CREAMOS LA SUCURSAL 
-       //Tiene domicilio 4 
+       Domicilio domicilio10=new Domicilio(10, "Ezpeleta", "Buenos Aires", 3);
+       //CREAMOS LA SUCURSALES
+       //Sucursal1
        sistema.agregarSucursal(domicilio4);
        Sucursal sucursal1=sistema.getLstSucursal().get(0);
+       //Sucursal2
+       //sistema.agregarSucursal(domicilio10);
+       //Sucursal sucursal2=sistema.getLstSucursal().get(1);
        //CREAMOS EMPLEADOS
        // AGREGAMOS EMPLEADO A LISTA DE SUCURSAL
       
@@ -142,42 +140,144 @@ public class App {
       //Detalle venta
       venta5.agregardetalleVenta(producto5, 6);
       //JSON
-      JSONObject jasonDomicilio=new JSONObject();
-      jasonDomicilio.put("ID :",sucursal1.getDomicilio().getId());
-      jasonDomicilio.put("Provincia",sucursal1.getDomicilio().getProvincia());
-      jasonDomicilio.put("Localidad: ",sucursal1.getDomicilio().getLocalidad());
-      jasonDomicilio.put("Calle: ",sucursal1.getDomicilio().getCalle());
-      jasonDomicilio.put("Numero de Calle: ",sucursal1.getDomicilio().getNroCalle());
-
-      JSONObject jasonEncargado=new JSONObject();
-      jasonEncargado.put("Cuil: ",sucursal1.getEncargado().getCuil());
-      jasonEncargado.put("DNI: ",sucursal1.getEncargado().getDni());
-      jasonEncargado.put("Nombre: ",sucursal1.getEncargado().getNombre());
-      jasonEncargado.put("Apellido: ",sucursal1.getEncargado().getApellido());
-      
-
-
-      JSONArray jsonArraySucursal=new JSONArray();
-      for(Sucursal sucursal:sistema.getLstSucursal()){
-        JSONObject jasonSucursal = new JSONObject();
-        jasonSucursal.put("ID: ",sucursal.getIdSucursal());
-        jasonSucursal.put("Encargado: ",jasonEncargado);
-        jasonSucursal.put("Domicilio: ",jasonDomicilio);
-
-        jsonArraySucursal.add(jasonSucursal);
-        }
-    
-    
-
-
+      //JSON Sucursales
+      JSONObject jsonDomicilio=crearJsonDomicilio(sucursal1.getDomicilio());
+      JSONObject jsonEncargado=crearJsonEmpleado(sucursal1.getEncargado());
+      JSONArray jsonArraySucursal=crearJsonArraySucursal(sistema.getLstSucursal(),jsonEncargado, jsonDomicilio);
+        String contenido = jsonArraySucursal.toString();
+        contenido = aplicarSaltosLineaObjetosAnidados(contenido);
 
     try (FileWriter fileWriter = new FileWriter("sucursales.json")) {
-      fileWriter.write(jsonArraySucursal.toJSONString());
+      //fileWriter.write(jsonArraySucursal.toJSONString());
+      fileWriter.write(contenido);
       fileWriter.flush();
   } catch (IOException e) {
       e.printStackTrace();
   }
 
+  //JSON Ventas
+  JSONObject jsonVentas;
+
  
   }
+
+  public static JSONArray crearJsonArrayVenta(List<Venta> lstVenta){
+    JSONArray jsonArrayVenta=new JSONArray();
+
+    for(Venta venta:lstVenta){
+      JSONObject jsonVenta = new JSONObject();
+      JSONObject jsonEmpleado= crearJsonEmpleado(venta.getEmpleado());
+      JSONObject jsonCliente=crearJsonCliente(venta.getCliente());
+      //ESTO HAY QUE HACER LO MISMO COMO SUCURSALES con FOR 
+      //JSONObject jsonDetalleVenta=crearJsonDetalleVenta(venta.ge)
+      jsonVenta.put("Ticket: ",venta.getNroTicket());
+      jsonVenta.put("Ticket Fiscal: ",venta.getTicketFiscal());
+      jsonVenta.put("Fecha: ",venta.getFecha());
+      jsonVenta.put("Hora: ",venta.getHora());
+      jsonVenta.put("Efectivo: ",venta.isEfectivo());
+      jsonVenta.put("Empleado: ",jsonEmpleado);
+      jsonVenta.put("Cliente: ",jsonCliente);
+      jsonVenta.put("Detalle Venta", jsonArrayVenta);
+      jsonArrayVenta.add(jsonVenta);
+  
+      }
+    return jsonArrayVenta;
+  }
+public static JSONObject crearJsonDetalleVenta(DetalleVenta detalleVenta){
+  JSONObject jsonDetalleVenta=new JSONObject();
+  JSONObject jsonProducto=crearJsonProducto(detalleVenta.getProducto());
+  jsonDetalleVenta.put("Cantidad: ",detalleVenta.getCantidad());
+  jsonDetalleVenta.put("Producto: ",jsonProducto);
+  
+  return jsonDetalleVenta;
+}
+public static JSONObject crearJsonProducto(Producto producto){
+  JSONObject jsonProducto=new JSONObject();
+  jsonProducto.put("ID: ",producto.getIdProducto());
+  jsonProducto.put("Descipcion: ",producto.getDescripcion());
+  jsonProducto.put("Precio: ",producto.getPrecio());
+
+return jsonProducto;
+}
+public static JSONObject crearJsonDomicilio(Domicilio domicilio){
+  JSONObject jsonDomicilio=new JSONObject();
+  jsonDomicilio.put("ID :",domicilio.getId());
+  jsonDomicilio.put("Provincia",domicilio.getProvincia());
+  jsonDomicilio.put("Localidad: ",domicilio.getLocalidad());
+  jsonDomicilio.put("Calle: ",domicilio.getCalle());
+  jsonDomicilio.put("Numero de Calle: ",domicilio.getNroCalle());
+
+  return jsonDomicilio;
+}
+public static JSONObject crearJsonEmpleado(Empleado empleado){
+  JSONObject jsonEmpleado=new JSONObject();
+  jsonEmpleado.put("Cuil: ",empleado.getCuil());
+  jsonEmpleado.put("DNI: ",empleado.getDni());
+  jsonEmpleado.put("Nombre: ",empleado.getNombre());
+  jsonEmpleado.put("Apellido: ",empleado.getApellido());
+  return jsonEmpleado;
+}
+public static JSONArray crearJsonArraySucursal(List<Sucursal> lstSucursal,JSONObject jsonEncargado,JSONObject jsonDomicilio){
+  JSONArray jsonArraySucursal=new JSONArray();
+
+  for(Sucursal sucursal:lstSucursal){
+    JSONObject jsonSucursal = new JSONObject();
+    jsonSucursal.put("ID: ",sucursal.getIdSucursal());
+    jsonSucursal.put("Encargado: ",jsonEncargado);
+    jsonSucursal.put("Domicilio: ",jsonDomicilio);
+    
+    jsonArraySucursal.add(jsonSucursal);
+
+    }
+    return jsonArraySucursal;
+}
+
+public static JSONObject crearJsonCliente(Cliente cliente){
+  JSONObject jsonCliente=new JSONObject();
+
+  jsonCliente.put("Nombre: ",cliente.getNombre());
+  jsonCliente.put("Apellido: ",cliente.getNombre());
+  jsonCliente.put("DNI: ",cliente.getDni());
+  jsonCliente.put("Numero afiliado: ",cliente.getNro_afiliado());
+
+  return jsonCliente;
+}
+public static JSONObject crearJsonObraSocial(ObraSocial obraSocial){
+JSONObject jsonObrasocial=new JSONObject();
+jsonObrasocial.put("Nombre: ",obraSocial.getNombre());
+jsonObrasocial.put("Codigo: ",obraSocial.getCodigo());
+return jsonObrasocial;
+}
+  public static String aplicarSaltosLineaObjetosAnidados(String json) {
+    StringBuilder resultado = new StringBuilder();
+    int nivel = 0;
+
+    for (char c : json.toCharArray()) {
+        if (c == '{' || c == '[') {
+            nivel++;
+            resultado.append(c).append("\n").append(indentar(nivel));
+        } else if (c == '}' || c == ']') {
+            nivel--;
+            resultado.append("\n").append(indentar(nivel)).append(c);
+        } else if (c == ',') {
+            resultado.append(c).append("\n").append(indentar(nivel));
+        } else {
+            resultado.append(c);
+        }
+    }
+
+    return resultado.toString();
+}
+public static String indentar(int nivel) {
+    StringBuilder espacios = new StringBuilder();
+
+    for (int i = 0; i < nivel; i++) {
+        espacios.append("    "); // 4 espacios por nivel
+    }
+
+    return espacios.toString();
+}
+
+
+
 }

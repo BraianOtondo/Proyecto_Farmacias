@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 //import java.util.ArrayList;
 import java.util.List;
+
 public class App {
     public static void main(String[] args){
         //CREAMOS SISTEMA QUE TIENE SUCURSALES
@@ -31,16 +32,24 @@ public class App {
        Domicilio domicilio8=new Domicilio(8, "Ezpeleta", "Buenos Aires", 3);
        Domicilio domicilio9=new Domicilio(9, "Monte Grande", "Buenos Aires", "Pehuajo", 793);
        Domicilio domicilio10=new Domicilio(10, "Ezpeleta", "Buenos Aires", 3);
+       
+       Domicilio domicilio11=new Domicilio(11,"Lanus", "Buenos Aires", "25 de Mayo", 555);
+       Domicilio domicilio12=new Domicilio(12,"Lanus","Buenos Aires","2 de Mayo",1383);
+       Domicilio domicilio13=new Domicilio(13, "Gerli", "Buenos Aires","Hipolito Yrigoyen",4545);
+       Domicilio domicilio14=new Domicilio(14,"Remedios de Escalada","Buenos Aires","Rosales",587);
+       Domicilio domicilio15=new Domicilio(15,"Banfield","Buenos Aires","Antonio Beruti",977);
+       Domicilio domicilio16=new Domicilio(16, "Banfield", "Buenos Aires", "Tucuman",1860);
+ 
+       
        //CREAMOS LA SUCURSALES
        //Sucursal1
        sistema.agregarSucursal(domicilio4);
-       Sucursal sucursal1=sistema.getLstSucursal().get(0);
-       //Sucursal2
-       //sistema.agregarSucursal(domicilio10);
-       //Sucursal sucursal2=sistema.getLstSucursal().get(1);
-       //CREAMOS EMPLEADOS
-       // AGREGAMOS EMPLEADO A LISTA DE SUCURSAL
-      
+       Sucursal sucursal1=sistema.getLstSucursal().get(0);       
+       //Sucursal 2
+       sistema.agregarSucursal(domicilio11);
+       Sucursal sucursal2=sistema.getLstSucursal().get(1);
+       
+       
        //Empleado Roberto Lopez
        sistema.getLstSucursal().get(0).agregarEmpleado(44324234,"20443242349", "Roberto", "Lopez", 4242456, obraSocial3, domicilio1,false);
         Empleado empleado1=sistema.getLstSucursal().get(0).traerEmpleado(44324234);
@@ -53,6 +62,14 @@ public class App {
       //Empleado Maria Sbatiny 
       sistema.getLstSucursal().get(0).agregarEmpleado(74844235,"25748442358", "Maria", "Sbatiny", 8544, obraSocial3, domicilio6, false); 
       Empleado empleado4=sistema.getLstSucursal().get(0).traerEmpleado(74844235);
+      
+      //Empleados Sucursal 2
+      sistema.getLstSucursal().get(1).agregarEmpleado(42522794,"27425527943", "Rocio", "Torres", 1547821, obraSocial2, domicilio12,true);
+       Empleado empleado5=sistema.getLstSucursal().get(1).traerEmpleado(42522794);
+       
+       sistema.getLstSucursal().get(1).agregarEmpleado(48961255,"20489612559", "Jose", "Rodriguez", 554478, obraSocial2, domicilio13,false);
+      Empleado empleado6=sistema.getLstSucursal().get(1).traerEmpleado(48961255);
+      
       //CREAMOS CLIENTES 
       
       //Cliente Guillermo Francella 
@@ -73,6 +90,15 @@ public class App {
        Cliente cliente8=new Cliente(7603764, "Tomas", "Solari", domicilio6);
        //Cliente Adrian Thinks
        Cliente cliente9=new Cliente(5125468, "Adrian", "Thinks", domiclilio3);
+       //Cliente Roberto Gonzalez
+       Cliente cliente10=new Cliente(115423, "Roberto", "Gonzalez", 336604, obraSocial4, domicilio14);
+       //Cliente Ivana Mendez
+       Cliente cliente11=new Cliente(997700, "Ivana", "Mendez", 895401, obraSocial2, domicilio15);
+       //Cliente Santiago Mena
+       Cliente cliente12=new Cliente(485926, "Santiago", "Mena",181878,obraSocial1, domicilio16);
+
+
+       
       
        // CREAMOS LABORATORIOS
       //Laboratorio 2356
@@ -103,7 +129,7 @@ public class App {
       Producto producto9=new Producto(9, 460, false, "Colgate Menta ", laboratorio3);
 
        // CREAMOS VENTAS
-       //(Hora de venta 24hs todas las farmacias)
+       //(Hora de venta 24h todas las farmacias)
 
        //Venta  1-4253------------------------------------------------------------------
        sistema.getLstSucursal().get(0).agregarVenta(4253, LocalDate.of(2023,2,5), LocalTime.of(9, 30),sucursal1,cliente1,empleado1,false);
@@ -139,12 +165,37 @@ public class App {
       Venta venta5=sistema.getLstSucursal().get(0).traerVenta(5167);
       //Detalle venta
       venta5.agregardetalleVenta(producto5, 6);
+      
+      //--------------------------------------------------------------
+      
+      //Ventas Sucursal 2
+      sistema.getLstSucursal().get(1).agregarVenta(5566, LocalDate.of(2023,2,25), LocalTime.of(19, 30),sucursal2,cliente10,empleado6,false);
+      Venta venta6=sistema.getLstSucursal().get(1).traerVenta(5566);
+      //Detalle de Venta
+      venta6.agregardetalleVenta(producto4, 3);
+
+     sistema.getLstSucursal().get(1).agregarVenta(98743, LocalDate.of(2023, 3, 3), LocalTime.of(14, 11), sucursal2, cliente11, empleado6, true);
+     Venta venta7=sistema.getLstSucursal().get(1).traerVenta(98743);
+     //Detalle de venta
+     venta7.agregardetalleVenta(producto5, 1);
+     venta7.agregardetalleVenta(producto2, 5);
+     venta7.agregardetalleVenta(producto3, 1);
+
+     sistema.getLstSucursal().get(1).agregarVenta(33114, LocalDate.of(2023, 4, 8), LocalTime.of(9,06), sucursal2, cliente12, empleado6, false);
+     Venta venta8=sistema.getLstSucursal().get(1).traerVenta(33114);
+     //Detalle de venta
+     venta8.agregardetalleVenta(producto6, 2);
+     venta8.agregardetalleVenta(producto3, 1);
+     venta8.agregardetalleVenta(producto1, 1);
+      
+      
       //JSON
+      
       //JSON Sucursales
       JSONObject jsonDomicilio=crearJsonDomicilio(sucursal1.getDomicilio());
       JSONObject jsonEncargado=crearJsonEmpleado(sucursal1.getEncargado());
       JSONArray jsonArraySucursal=crearJsonArraySucursal(sistema.getLstSucursal(),jsonEncargado, jsonDomicilio);
-        String contenido = jsonArraySucursal.toString();
+      String contenido = jsonArraySucursal.toString();
         contenido = aplicarSaltosLineaObjetosAnidados(contenido);
 
     try (FileWriter fileWriter = new FileWriter("sucursales.json")) {
@@ -157,6 +208,19 @@ public class App {
 
   //JSON Ventas
   JSONObject jsonVentas;
+  JSONObject jsonEmpleado=crearJsonEmpleado(sucursal1.getLstEmpleado().get(0));
+  JSONObject jsonCliente=crearJsonCliente();
+  JSONArray jsonArrayVenta=crearJsonArrayVenta(sucursal1.getLstVenta());
+  String contenido = jsonArrayVenta.toString();
+    contenido = aplicarSaltosLineaObjetosAnidados(contenido);
+
+try (FileWriter fileWriter = new FileWriter("ventas.json")) {
+  //fileWriter.write(jsonArraySucursal.toJSONString());
+  fileWriter.write(contenido);
+  fileWriter.flush();
+} catch (IOException e) {
+  e.printStackTrace();
+}
 
  
   }
@@ -183,6 +247,7 @@ public class App {
       }
     return jsonArrayVenta;
   }
+  
 public static JSONObject crearJsonDetalleVenta(DetalleVenta detalleVenta){
   JSONObject jsonDetalleVenta=new JSONObject();
   JSONObject jsonProducto=crearJsonProducto(detalleVenta.getProducto());
@@ -191,6 +256,7 @@ public static JSONObject crearJsonDetalleVenta(DetalleVenta detalleVenta){
   
   return jsonDetalleVenta;
 }
+
 public static JSONObject crearJsonProducto(Producto producto){
   JSONObject jsonProducto=new JSONObject();
   jsonProducto.put("ID: ",producto.getIdProducto());
@@ -199,6 +265,7 @@ public static JSONObject crearJsonProducto(Producto producto){
 
 return jsonProducto;
 }
+
 public static JSONObject crearJsonDomicilio(Domicilio domicilio){
   JSONObject jsonDomicilio=new JSONObject();
   jsonDomicilio.put("ID :",domicilio.getId());
@@ -209,6 +276,7 @@ public static JSONObject crearJsonDomicilio(Domicilio domicilio){
 
   return jsonDomicilio;
 }
+
 public static JSONObject crearJsonEmpleado(Empleado empleado){
   JSONObject jsonEmpleado=new JSONObject();
   jsonEmpleado.put("Cuil: ",empleado.getCuil());
@@ -217,6 +285,7 @@ public static JSONObject crearJsonEmpleado(Empleado empleado){
   jsonEmpleado.put("Apellido: ",empleado.getApellido());
   return jsonEmpleado;
 }
+
 public static JSONArray crearJsonArraySucursal(List<Sucursal> lstSucursal,JSONObject jsonEncargado,JSONObject jsonDomicilio){
   JSONArray jsonArraySucursal=new JSONArray();
 
@@ -242,13 +311,15 @@ public static JSONObject crearJsonCliente(Cliente cliente){
 
   return jsonCliente;
 }
+
 public static JSONObject crearJsonObraSocial(ObraSocial obraSocial){
-JSONObject jsonObrasocial=new JSONObject();
-jsonObrasocial.put("Nombre: ",obraSocial.getNombre());
-jsonObrasocial.put("Codigo: ",obraSocial.getCodigo());
-return jsonObrasocial;
+	JSONObject jsonObrasocial=new JSONObject();
+	jsonObrasocial.put("Nombre: ",obraSocial.getNombre());
+	jsonObrasocial.put("Codigo: ",obraSocial.getCodigo());
+	return jsonObrasocial;
 }
-  public static String aplicarSaltosLineaObjetosAnidados(String json) {
+
+public static String aplicarSaltosLineaObjetosAnidados(String json) {
     StringBuilder resultado = new StringBuilder();
     int nivel = 0;
 
@@ -268,6 +339,7 @@ return jsonObrasocial;
 
     return resultado.toString();
 }
+
 public static String indentar(int nivel) {
     StringBuilder espacios = new StringBuilder();
 
@@ -277,7 +349,5 @@ public static String indentar(int nivel) {
 
     return espacios.toString();
 }
-
-
 
 }

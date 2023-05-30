@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Formatter;
 //import java.util.ArrayList;
 import java.util.List;
 
@@ -140,6 +141,7 @@ public class App {
        
       //Venta 1-62346------------------------------------------------------------------
       sistema.getLstSucursal().get(0).agregarVenta(62346, LocalDate.of(2023, 1, 15), LocalTime.of(23, 11), sucursal1, cliente9, empleado4, true);
+   
       Venta venta2=sistema.getLstSucursal().get(0).traerVenta(62346);
       //Detalle venta
       venta2.agregardetalleVenta(producto4, 1);
@@ -192,9 +194,8 @@ public class App {
       //JSON
       
       //JSON Sucursales
-      JSONObject jsonDomicilio=crearJsonDomicilio(sucursal1.getDomicilio());
-      JSONObject jsonEncargado=crearJsonEmpleado(sucursal1.getEncargado());
-      JSONArray jsonArraySucursal=crearJsonArraySucursal(sistema.getLstSucursal(),jsonEncargado, jsonDomicilio);
+     
+      JSONArray jsonArraySucursal=crearJsonArraySucursal(sistema.getLstSucursal());
       String contenido = jsonArraySucursal.toString();
         contenido = aplicarSaltosLineaObjetosAnidados(contenido);
 
@@ -206,42 +207,57 @@ public class App {
       e.printStackTrace();
   }
 
-  //JSON Ventas
-  JSONObject jsonVentas;
-  JSONObject jsonEmpleado=crearJsonEmpleado(sucursal1.getLstEmpleado().get(0));
-  JSONObject jsonCliente=crearJsonCliente();
-  JSONArray jsonArrayVenta=crearJsonArrayVenta(sucursal1.getLstVenta());
-  String contenido = jsonArrayVenta.toString();
-    contenido = aplicarSaltosLineaObjetosAnidados(contenido);
-
+//JSON VENTAS DE SUCURSAL 1
+JSONArray jsonArrayVentas=crearJsonArrayVenta(sistema.getLstSucursal().get(0).getLstVenta());
+String contenido2=jsonArrayVentas.toString();
+contenido2=aplicarSaltosLineaObjetosAnidados(contenido2);
 try (FileWriter fileWriter = new FileWriter("ventas.json")) {
-  //fileWriter.write(jsonArraySucursal.toJSONString());
-  fileWriter.write(contenido);
+  fileWriter.write(contenido2);
   fileWriter.flush();
 } catch (IOException e) {
   e.printStackTrace();
 }
 
- 
+//JSON EMPLEADOS DE SUCURSAL 1
+JSONArray jsonArrayEmpleados=crearJsonArrayEmpleado(sistema.getLstSucursal().get(0).getLstEmpleado());
+String contenido3=jsonArrayEmpleados.toString();
+contenido3=aplicarSaltosLineaObjetosAnidados(contenido3);
+try (FileWriter fileWriter = new FileWriter("empleados.json")) {
+  fileWriter.write(contenido3);
+  fileWriter.flush();
+} catch (IOException e) {
+  e.printStackTrace();
+}
   }
-
+  public static JSONArray crearJsonArrayEmpleado(List<Empleado> lstEmpleados){
+    JSONArray jsonArrayEmpleado=new JSONArray();
+    int i=0;
+    for(Empleado empleado:lstEmpleados){
+      JSONObject jsonEmpleado=crearJsonEmpleados(empleado,i);
+      jsonArrayEmpleado.add(jsonEmpleado);
+      i++;
+    }
+    return jsonArrayEmpleado;
+  }
   public static JSONArray crearJsonArrayVenta(List<Venta> lstVenta){
     JSONArray jsonArrayVenta=new JSONArray();
-
+    int i=0;
     for(Venta venta:lstVenta){
       JSONObject jsonVenta = new JSONObject();
       JSONObject jsonEmpleado= crearJsonEmpleado(venta.getEmpleado());
       JSONObject jsonCliente=crearJsonCliente(venta.getCliente());
-      //ESTO HAY QUE HACER LO MISMO COMO SUCURSALES con FOR 
-      //JSONObject jsonDetalleVenta=crearJsonDetalleVenta(venta.ge)
-      jsonVenta.put("Ticket: ",venta.getNroTicket());
-      jsonVenta.put("Ticket Fiscal: ",venta.getTicketFiscal());
-      jsonVenta.put("Fecha: ",venta.getFecha());
-      jsonVenta.put("Hora: ",venta.getHora());
+      JSONArray jsonArrayDetalleVenta=crearJSONArrayDetalleVenta(venta.getLstVenta());
+
+      jsonVenta.put("VENTA",i);
+      jsonVenta.put("Fecha: ",venta.getFecha().toString());
+      jsonVenta.put("Hora: ",venta.getHora().toString());
       jsonVenta.put("Efectivo: ",venta.isEfectivo());
       jsonVenta.put("Empleado: ",jsonEmpleado);
       jsonVenta.put("Cliente: ",jsonCliente);
-      jsonVenta.put("Detalle Venta", jsonArrayVenta);
+      jsonVenta.put("Detalle Venta", jsonArrayDetalleVenta);
+      jsonVenta.put("Ticket Fiscal: ",venta.getTicketFiscal());
+      jsonVenta.put("Ticket: ",venta.getNroTicket());
+      i++;
       jsonArrayVenta.add(jsonVenta);
   
       }
@@ -286,11 +302,41 @@ public static JSONObject crearJsonEmpleado(Empleado empleado){
   return jsonEmpleado;
 }
 
-public static JSONArray crearJsonArraySucursal(List<Sucursal> lstSucursal,JSONObject jsonEncargado,JSONObject jsonDomicilio){
+public static JSONObject crearJsonEmpleados(Empleado empleado,int i){
+  JSONObject jsonEmpleado=new JSONObject();
+  JSONObject jsonObraSocial=crearJsonObraSocial(empleado.getObra_social());
+  JSONObject jsonDomicilio=crearJsonDomicilio(empleado.getDomicilio());
+
+
+  jsonEmpleado.put("Domicilio: ",jsonDomicilio);
+  jsonEmpleado.put("Obra Social", jsonObraSocial);
+  jsonEmpleado.put("Cuil: ",empleado.getCuil());
+  jsonEmpleado.put("DNI: ",empleado.getDni());
+  jsonEmpleado.put("Apellido: ",empleado.getApellido());
+  jsonEmpleado.put("Nombre: ",empleado.getNombre());
+  jsonEmpleado.put("EMPLEADO: ",i);
+
+  return jsonEmpleado;
+}
+public static JSONArray crearJSONArrayDetalleVenta(List<DetalleVenta> lstDetalleVenta){
+  JSONArray jsonArrayDetalleVenta=new JSONArray();
+  for(DetalleVenta detalleVenta:lstDetalleVenta){
+    JSONObject jsonDetalleVenta=crearJsonDetalleVenta(detalleVenta);
+    jsonArrayDetalleVenta.add(jsonDetalleVenta);
+  }
+  
+  return jsonArrayDetalleVenta;
+}
+//private Producto producto;
+//private int cantidad;
+
+public static JSONArray crearJsonArraySucursal(List<Sucursal> lstSucursal){
   JSONArray jsonArraySucursal=new JSONArray();
 
   for(Sucursal sucursal:lstSucursal){
     JSONObject jsonSucursal = new JSONObject();
+    JSONObject jsonDomicilio=crearJsonDomicilio(sucursal.getDomicilio());
+    JSONObject jsonEncargado=crearJsonEmpleado(sucursal.getEncargado());
     jsonSucursal.put("ID: ",sucursal.getIdSucursal());
     jsonSucursal.put("Encargado: ",jsonEncargado);
     jsonSucursal.put("Domicilio: ",jsonDomicilio);

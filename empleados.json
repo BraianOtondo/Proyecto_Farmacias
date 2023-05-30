@@ -1,0 +1,74 @@
+[
+    {
+        "Domicilio: ":{
+            "Calle: ":"Pehuajo",
+            "Numero de Calle: ":763,
+            "ID :":1,
+            "Localidad: ":"Monte Grande",
+            "Provincia":"Buenos Aires"
+        },
+        "Apellido: ":"Lopez",
+        "Nombre: ":"Roberto",
+        "DNI: ":44324234,
+        "Obra Social":{
+            "Codigo: ":3,
+            "Nombre: ":"Galeano"
+        },
+        "EMPLEADO: ":0,
+        "Cuil: ":"20443242349"
+    },
+    {
+        "Domicilio: ":{
+            "Calle: ":"Alsina",
+            "Numero de Calle: ":323,
+            "ID :":2,
+            "Localidad: ":"Lanus",
+            "Provincia":"Buenos Aires"
+        },
+        "Apellido: ":"Vortereni",
+        "Nombre: ":"Pedro",
+        "DNI: ":442091994,
+        "Obra Social":{
+            "Codigo: ":3,
+            "Nombre: ":"Galeano"
+        },
+        "EMPLEADO: ":1,
+        "Cuil: ":"214420919949"
+    },
+    {
+        "Domicilio: ":{
+            "Calle: ":"Rosas",
+            "Numero de Calle: ":422,
+            "ID :":5,
+            "Localidad: ":"Banfield",
+            "Provincia":"Buenos Aires"
+        },
+        "Apellido: ":"Sabina",
+        "Nombre: ":"Gustavo",
+        "DNI: ":4252225,
+        "Obra Social":{
+            "Codigo: ":2,
+            "Nombre: ":"OSDE"
+        },
+        "EMPLEADO: ":2,
+        "Cuil: ":"2142522257"
+    },
+    {
+        "Domicilio: ":{
+            "Calle: ":null,
+            "Numero de Calle: ":56,
+            "ID :":6,
+            "Localidad: ":"Quilmes",
+            "Provincia":"Buenos Aires"
+        },
+        "Apellido: ":"Sbatiny",
+        "Nombre: ":"Maria",
+        "DNI: ":74844235,
+        "Obra Social":{
+            "Codigo: ":3,
+            "Nombre: ":"Galeano"
+        },
+        "EMPLEADO: ":3,
+        "Cuil: ":"25748442358"
+    }
+]

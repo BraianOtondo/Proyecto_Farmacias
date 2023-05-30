@@ -1,0 +1,192 @@
+[
+    {
+        "VENTA":0,
+        "Detalle Venta":[
+            {
+                "Producto: ":{
+                    "ID: ":82,
+                    "Descipcion: ":"Tableta de IbuEvanol 6 comprimidos",
+                    "Precio: ":1000.0
+                },
+                "Cantidad: ":2
+            },
+            {
+                "Producto: ":{
+                    "ID: ":672,
+                    "Descipcion: ":"Shampoo Garnier Aguacate ",
+                    "Precio: ":479.0
+                },
+                "Cantidad: ":4
+            }
+        ],
+        "Fecha: ":"2023-02-05",
+        "Hora: ":"09:30",
+        "Efectivo: ":false,
+        "Empleado: ":{
+            "Apellido: ":"Lopez",
+            "Nombre: ":"Roberto",
+            "DNI: ":44324234,
+            "Cuil: ":"20443242349"
+        },
+        "Cliente: ":{
+            "Numero afiliado: ":532523,
+            "Apellido: ":"Guillermo",
+            "Nombre: ":"Guillermo",
+            "DNI: ":442452
+        },
+        "Ticket: ":4253,
+        "Ticket Fiscal: ":"1-4253"
+    },
+    {
+        "VENTA":1,
+        "Detalle Venta":[
+            {
+                "Producto: ":{
+                    "ID: ":16,
+                    "Descipcion: ":"Vitaminas Superdin ",
+                    "Precio: ":3000.0
+                },
+                "Cantidad: ":1
+            },
+            {
+                "Producto: ":{
+                    "ID: ":10,
+                    "Descipcion: ":"EvaTest",
+                    "Precio: ":6000.0
+                },
+                "Cantidad: ":5
+            },
+            {
+                "Producto: ":{
+                    "ID: ":231,
+                    "Descipcion: ":"Tableta de Ibuprofeno con 8 comprimidos",
+                    "Precio: ":500.0
+                },
+                "Cantidad: ":2
+            }
+        ],
+        "Fecha: ":"2023-01-15",
+        "Hora: ":"23:11",
+        "Efectivo: ":true,
+        "Empleado: ":{
+            "Apellido: ":"Sbatiny",
+            "Nombre: ":"Maria",
+            "DNI: ":74844235,
+            "Cuil: ":"25748442358"
+        },
+        "Cliente: ":{
+            "Numero afiliado: ":0,
+            "Apellido: ":"Adrian",
+            "Nombre: ":"Adrian",
+            "DNI: ":5125468
+        },
+        "Ticket: ":62346,
+        "Ticket Fiscal: ":"1-62346"
+    },
+    {
+        "VENTA":2,
+        "Detalle Venta":[
+            {
+                "Producto: ":{
+                    "ID: ":177,
+                    "Descipcion: ":"Migral 600mg 1 comprimido",
+                    "Precio: ":60.0
+                },
+                "Cantidad: ":6
+            }
+        ],
+        "Fecha: ":"2023-02-06",
+        "Hora: ":"14:42",
+        "Efectivo: ":true,
+        "Empleado: ":{
+            "Apellido: ":"Sabina",
+            "Nombre: ":"Gustavo",
+            "DNI: ":4252225,
+            "Cuil: ":"2142522257"
+        },
+        "Cliente: ":{
+            "Numero afiliado: ":72348,
+            "Apellido: ":"Pedro",
+            "Nombre: ":"Pedro",
+            "DNI: ":6788437
+        },
+        "Ticket: ":45615,
+        "Ticket Fiscal: ":"1-45615"
+    },
+    {
+        "VENTA":3,
+        "Detalle Venta":[
+            {
+                "Producto: ":{
+                    "ID: ":9,
+                    "Descipcion: ":"Colgate Menta ",
+                    "Precio: ":460.0
+                },
+                "Cantidad: ":1
+            },
+            {
+                "Producto: ":{
+                    "ID: ":16,
+                    "Descipcion: ":"Vitaminas Superdin ",
+                    "Precio: ":3000.0
+                },
+                "Cantidad: ":4
+            },
+            {
+                "Producto: ":{
+                    "ID: ":29,
+                    "Descipcion: ":"Cepillo de dientes para brackets GUM",
+                    "Precio: ":800.0
+                },
+                "Cantidad: ":2
+            }
+        ],
+        "Fecha: ":"2023-09-21",
+        "Hora: ":"02:31",
+        "Efectivo: ":false,
+        "Empleado: ":{
+            "Apellido: ":"Vortereni",
+            "Nombre: ":"Pedro",
+            "DNI: ":442091994,
+            "Cuil: ":"214420919949"
+        },
+        "Cliente: ":{
+            "Numero afiliado: ":0,
+            "Apellido: ":"Tomas",
+            "Nombre: ":"Tomas",
+            "DNI: ":7603764
+        },
+        "Ticket: ":8321,
+        "Ticket Fiscal: ":"1-8321"
+    },
+    {
+        "VENTA":4,
+        "Detalle Venta":[
+            {
+                "Producto: ":{
+                    "ID: ":178,
+                    "Descipcion: ":"Packete de Gasas",
+                    "Precio: ":100.0
+                },
+                "Cantidad: ":6
+            }
+        ],
+        "Fecha: ":"2023-10-02",
+        "Hora: ":"08:11",
+        "Efectivo: ":true,
+        "Empleado: ":{
+            "Apellido: ":"Sbatiny",
+            "Nombre: ":"Maria",
+            "DNI: ":74844235,
+            "Cuil: ":"25748442358"
+        },
+        "Cliente: ":{
+            "Numero afiliado: ":0,
+            "Apellido: ":"Adrian",
+            "Nombre: ":"Adrian",
+            "DNI: ":5125468
+        },
+        "Ticket: ":5167,
+        "Ticket Fiscal: ":"1-5167"
+    }
+]
